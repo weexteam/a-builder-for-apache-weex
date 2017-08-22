@@ -14,7 +14,7 @@ const ext2framework = {
 function loadModulePath(moduleName, extra) {
     try {
         var path = require.resolve(pathTool.join(moduleName, extra || ''))
-        return path.slice(0, path.indexOf(moduleName) + moduleName.length)
+        return path.slice(0, path.lastIndexOf(moduleName) + moduleName.length)
     } catch (e) {
         return moduleName
     }
