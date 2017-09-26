@@ -11,15 +11,8 @@ const ext2framework = {
     '.we': 'Weex',
     '.js': 'Vue'
 }
-function loadModulePath(moduleName, extra) {
-    try {
-        var path = require.resolve(pathTool.join(moduleName, extra || ''))
-        return path.slice(0, path.lastIndexOf(moduleName) + moduleName.length)
-    } catch (e) {
-        return moduleName
-    }
-}
 let defaultExt = ['we', 'vue', 'js']
+
 class WeexBuilder extends WebpackBuilder {
     constructor(source, dest, options = {}) {
         if (options.ext && typeof options.ext === 'string') {
@@ -31,35 +24,42 @@ class WeexBuilder extends WebpackBuilder {
         }
         super(source, dest, options)
     }
-
-    initConfig() {
+    loadModulePath (moduleName, extra) {
+        try {
+            let path = require.resolve(pathTool.join(moduleName, extra || ''))
+            return path.slice(0, path.lastIndexOf(moduleName) + moduleName.length)
+        } catch (e) {
+            return moduleName
+        }
+    }
+    initConfig () {
         super.initConfig()
-        this.config.entry = this.source.map(s=>s + '?entry=true')
-        var bannerPlugin = new BannerPlugin(function (file) {
+        let weexLoader = this.loadModulePath('weex-loader')
+        let vueLoader = this.loadModulePath('vue-loader')
+        let bannerPlugin = new BannerPlugin(function (file) {
             let ext = pathTool.extname(file)
             return '// { "framework": "' + ext2framework[ext] + '" }'
         })
 
+        this.config.entry = this.source.map(s=>s + '?entry=true')
+
         this.config.module.loaders.push({
             test: /\.js(\?[^?]+)?$/,
-            loader: loadModulePath('babel-loader'),
+            loader: this.loadModulePath('babel-loader'),
             exclude: /node_modules/
         })
-        this.config.babel = {
-            presets: [loadModulePath('babel-preset-es2015')],
-            plugins: [
-                loadModulePath('babel-plugin-transform-runtime'),
-                loadModulePath('babel-plugin-add-module-exports')
-            ],
-            babelrc:false
-        }
-        let weexLoader = loadModulePath('weex-loader')
-        let vueLoader = loadModulePath('vue-loader')
-
         this.config.module.loaders.push({
             test: /\.we(\?[^?]+)?$/,
             loader: weexLoader
         })
+        this.config.babel = {
+            presets: [this.loadModulePath('babel-preset-es2015')],
+            plugins: [
+                this.loadModulePath('babel-plugin-transform-runtime'),
+                this.loadModulePath('babel-plugin-add-module-exports')
+            ],
+            babelrc:true
+        }
         if (this.options.web) {
             this.config.module.loaders.push({
                 test: /\.vue(\?[^?]+)?$/,
@@ -77,8 +77,8 @@ class WeexBuilder extends WebpackBuilder {
         }
         this.config.resolve = {
             alias: {
-                'babel-runtime': loadModulePath('babel-runtime', 'core-js'),
-                'babel-polyfill': loadModulePath('babel-polyfill'),
+                'babel-runtime': this.loadModulePath('babel-runtime', 'core-js'),
+                'babel-polyfill': this.loadModulePath('babel-polyfill'),
             }
         }
         this.config.plugins.push(bannerPlugin)

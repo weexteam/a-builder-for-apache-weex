@@ -9,16 +9,18 @@ const Gauge = require('gauge')
 let showHelp = true
 program.version(require('../package.json').version)
     .option('-v,--version', 'show version')
-    .option('--ext [ext]', 'set enabled extname for compiler default is vue|we')
-    .option('--web', 'set web mode for h5 render')
+    .option('-e,--ext [ext]', 'set enabled extname for compiler default is vue|we')
+    .option('-w,--web', 'set web mode for h5 render')
     .option('-w,--watch', 'watch files and rebuild')
-    .option('--devtool [devtool]', 'set webpack devtool mode')
-    .option('--min', 'compress the output js (will disable inline-source-map)')
+    .option('-d,--devtool [devtool]', 'set webpack devtool mode')
+    .option('-m,--min', 'compress the output js (will disable inline-source-map)')
     .arguments('<source> <dest>')
     .action(function (source, dest) {
         showHelp = false
         let gauge = new Gauge()
         let maxProgress = 0
+        let babelConfig
+        // if (program.config)
         builder.build(source, dest, {
             onProgress: function (complete, action) {
                 if (complete > maxProgress) {
@@ -33,7 +35,7 @@ program.version(require('../package.json').version)
             devtool: program.devtool,
             ext: program.ext || '',
             web: !!program.web,
-            min: !!program.min
+            min: !!program.min,
         }, function (err, output, json) {
             gauge.hide()
             if (err) {
