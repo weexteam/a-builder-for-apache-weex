@@ -33,6 +33,12 @@ module.exports = class WebpackBuilder {
       let relative = pathTool.relative(this.base, pathTool.dirname(e))
       entry[pathTool.join(relative, basename).split('?')[0]] = e
     })
+    this.config.output = {
+        filename: '[name].js',
+        path: this.dest,
+        sourceMapFilename: '[file].map',
+        devtoolModuleFilenameTemplate: 'webpack:///[resource-path]?[loaders]'
+    }
     this.config.entry = entry
     let lastHash = null
     webpack(this.config, (err, stats) => {

@@ -46,7 +46,6 @@ class WeexBuilder extends WebpackBuilder {
 
     // webpack devtool config
     this.config.devtool = this.options.devtool || ''
-
     // webpack module config
     this.config.module.loaders.push({
       test: /\.js(\?[^?]+)?$/,

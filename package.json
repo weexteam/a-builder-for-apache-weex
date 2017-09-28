@@ -1,6 +1,6 @@
 {
   "name": "weex-builder",
-  "version": "0.2.9",
+  "version": "0.2.10",
   "main": "builder.js",
   "bin": "bin/weex-builder.js",
   "dependencies": {
