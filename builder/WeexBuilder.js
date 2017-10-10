@@ -34,19 +34,16 @@ class WeexBuilder extends WebpackBuilder {
     let weexLoader = this.loadModulePath('weex-loader')
     let vueLoader = this.loadModulePath('vue-loader')
     let bannerPlugin = new BannerPlugin(function (file) {
-      let ext = pathTool.extname(file)
-      return '// { "framework": "' + ext2framework[ext] + '" }'
-    })
-
-    // webpack entry config
+        let ext = pathTool.extname(file)
+        return '// { "framework": "' + ext2framework[ext] + '" }'
+      })
+      // webpack entry config
     this.config.entry = this.source.map(s => s + '?entry=true')
-    
-    // webpack watch config
+      // webpack watch config
     this.config.watch = this.options.watch || false
-
-    // webpack devtool config
+      // webpack devtool config
     this.config.devtool = this.options.devtool || ''
-    // webpack module config
+      // webpack module config
     this.config.module.loaders.push({
       test: /\.js(\?[^?]+)?$/,
       loader: this.loadModulePath('babel-loader'),
@@ -67,7 +64,6 @@ class WeexBuilder extends WebpackBuilder {
         loader: weexLoader
       })
     }
-
     // webpack resolve config
     this.config.resolveLoader = {
       root: pathTool.dirname(weexLoader)
@@ -77,6 +73,15 @@ class WeexBuilder extends WebpackBuilder {
         'babel-runtime': this.loadModulePath('babel-runtime', 'core-js'),
         'babel-polyfill': this.loadModulePath('babel-polyfill'),
       }
+    }
+
+    this.config.babel = {
+      presets: [this.loadModulePath('babel-preset-es2015'), this.loadModulePath('babel-preset-stage-0')],
+      plugins: [
+        this.loadModulePath('babel-plugin-transform-runtime'),
+        this.loadModulePath('babel-plugin-add-module-exports')
+      ], 
+      babelrc: true
     }
 
     // webpack plugins config
@@ -91,7 +96,6 @@ class WeexBuilder extends WebpackBuilder {
     if (this.options.onProgress) {
       this.config.plugins.push(new webpack.ProgressPlugin(this.options.onProgress))
     }
-
   }
 }
 module.exports = WeexBuilder
