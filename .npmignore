@@ -1,1 +1,16 @@
+# Node
+node_modules/
+
+# Test
 example/
+test/
+
+# Created by IDE
+.idea/
+*.iml
+.DS_Store
+.vscode
+*.sw*
+
+# Build
+dest

@@ -1,6 +1,6 @@
-/*
- MIT License http://www.opensource.org/licenses/mit-license.php
- Author Tobias Koppers @sokra
+/**
+ * @desc This plugin rewrite webpack bannerPlugin to generate banner automaticaly
+ * @author Tobias Koppers @sokra
  */
 var ConcatSource = require("webpack-core/lib/ConcatSource")
 var ModuleFilenameHelpers = require("webpack/lib/ModuleFilenameHelpers")
