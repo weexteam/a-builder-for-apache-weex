@@ -1,6 +1,6 @@
 {
   "name": "weex-builder",
-  "version": "0.2.11",
+  "version": "0.2.12",
   "main": "builder.js",
   "bin": "bin/weex-builder.js",
   "dependencies": {
@@ -22,7 +22,7 @@
     "webpack": "^1.13.1",
     "webpack-core": "^0.6.9",
     "weex-components": "*",
-    "weex-loader": "^0.4.4",
+    "weex-loader": "^0.5.3",
     "weex-vue-components": "^0.1.3"
   }
 }
