@@ -1,6 +1,6 @@
 {
   "name": "weex-builder",
-  "version": "0.2.13-beta.2",
+  "version": "0.2.13-beta.5",
   "lockfileVersion": 1,
   "requires": true,
   "dependencies": {
@@ -4835,28 +4835,41 @@
       "integrity": "sha1-nKWKbg35B4VUzhcIaItleHVNht4="
     },
     "vue-loader": {
-      "version": "11.0.0",
-      "resolved": "https://registry.npmjs.org/vue-loader/-/vue-loader-11.0.0.tgz",
-      "integrity": "sha1-apAWhDRsHchDWFEqo7lbNBbcnY0=",
+      "version": "12.2.0",
+      "resolved": "https://registry.npmjs.org/vue-loader/-/vue-loader-12.2.0.tgz",
+      "integrity": "sha1-3c8Yk5jwg4S+NB0q8BAPb3l8OjQ=",
       "requires": {
         "consolidate": "0.14.5",
         "hash-sum": "1.0.2",
         "js-beautify": "1.7.3",
-        "loader-utils": "0.2.17",
+        "loader-utils": "1.1.0",
         "lru-cache": "4.1.1",
         "postcss": "5.2.17",
         "postcss-load-config": "1.2.0",
         "postcss-selector-parser": "2.2.3",
+        "resolve": "1.4.0",
         "source-map": "0.5.7",
         "vue-hot-reload-api": "2.1.0",
-        "vue-style-loader": "2.0.5",
+        "vue-style-loader": "3.0.3",
         "vue-template-es2015-compiler": "1.5.3"
+      },
+      "dependencies": {
+        "loader-utils": {
+          "version": "1.1.0",
+          "resolved": "https://registry.npmjs.org/loader-utils/-/loader-utils-1.1.0.tgz",
+          "integrity": "sha1-yYrvSIvM7aL/teLeZG1qdUQp9c0=",
+          "requires": {
+            "big.js": "3.2.0",
+            "emojis-list": "2.1.0",
+            "json5": "0.5.1"
+          }
+        }
       }
     },
     "vue-style-loader": {
-      "version": "2.0.5",
-      "resolved": "https://registry.npmjs.org/vue-style-loader/-/vue-style-loader-2.0.5.tgz",
-      "integrity": "sha1-8O+smS/r4/EuST4zTtsTzSNaPSI=",
+      "version": "3.0.3",
+      "resolved": "https://registry.npmjs.org/vue-style-loader/-/vue-style-loader-3.0.3.tgz",
+      "integrity": "sha512-P/ihpaZKU23T1kq3E0y4c+F8sbm1HQO69EFYoLoGMSGVAHroHsGir/WQ9qUavP8dyFYHmXenzHaJ/nqd8vfaxw==",
       "requires": {
         "hash-sum": "1.0.2",
         "loader-utils": "1.1.0"

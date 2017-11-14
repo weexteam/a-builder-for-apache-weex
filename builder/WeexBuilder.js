@@ -47,7 +47,7 @@ class WeexBuilder extends WebpackBuilder {
     this.config.module.loaders.push({
       test: /\.js(\?[^?]+)?$/,
       loader: this.loadModulePath('babel-loader'),
-      exclude: /node_modules(?!\/.*(weex).*)/
+      exclude: /node_modules(?!(\/ | \\).*(weex).*)/
     })
     this.config.module.loaders.push({
       test: /\.we(\?[^?]+)?$/,
