@@ -48,8 +48,7 @@ class WeexBuilder extends WebpackBuilder {
       // webpack module config
     this.config.module.loaders = [{
       test: /\.js(\?[^?]+)?$/,
-      loader: this.loadModulePath('babel-loader'),
-      exclude: /node_modules(?!(\/ | \\).*(weex).*)/
+      loader: this.loadModulePath('babel-loader')
     }, {
       test: /\.we(\?[^?]+)?$/,
       loader: weexLoader
@@ -89,10 +88,6 @@ class WeexBuilder extends WebpackBuilder {
     }
     this.config.babel = {
         presets: [this.loadModulePath('babel-preset-es2015'), this.loadModulePath('babel-preset-stage-0')],
-        plugins: [
-          this.loadModulePath('babel-plugin-transform-runtime'),
-          this.loadModulePath('babel-plugin-add-module-exports')
-        ],
         babelrc: true
       }
       // webpack plugins config
