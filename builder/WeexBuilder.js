@@ -16,7 +16,8 @@ class WeexBuilder extends WebpackBuilder {
   constructor(source, dest, options = {}) {
     if (options.ext && typeof options.ext === 'string') {
       options.ext = options.ext.split(/,|\|/).filter(e => defaultExt.indexOf(e) === -1).concat(defaultExt).join('|')
-    } else {
+    }
+    else {
       options.ext = defaultExt.join('|')
     }
     super(source, dest, options)
@@ -25,7 +26,8 @@ class WeexBuilder extends WebpackBuilder {
     try {
       let path = require.resolve(pathTool.join(moduleName, extra || ''))
       return path.slice(0, path.lastIndexOf(moduleName) + moduleName.length)
-    } catch (e) {
+    }
+    catch (e) {
       return moduleName
     }
   }
@@ -44,21 +46,32 @@ class WeexBuilder extends WebpackBuilder {
       // webpack devtool config
     this.config.devtool = this.options.devtool || ''
       // webpack module config
-    this.config.module.loaders.push({
+    this.config.module.loaders = [{
       test: /\.js(\?[^?]+)?$/,
       loader: this.loadModulePath('babel-loader'),
       exclude: /node_modules(?!(\/ | \\).*(weex).*)/
-    })
-    this.config.module.loaders.push({
+    }, {
       test: /\.we(\?[^?]+)?$/,
       loader: weexLoader
-    })
+    }, {
+      test: /\.s[a|c]ss$/,
+      loaders: 'style!css!sass'
+    }, {
+      test: /\.less$/,
+      loaders: 'style!css!less'
+    }]
+    this.config.vue = {
+      loaders: {
+        scss: 'style!css!sass'
+      }
+    }
     if (this.options.web) {
       this.config.module.loaders.push({
         test: /\.vue(\?[^?]+)?$/,
         loader: vueLoader
       })
-    } else {
+    }
+    else {
       this.config.module.loaders.push({
         test: /\.vue(\?[^?]+)?$/,
         loader: weexLoader
@@ -74,17 +87,15 @@ class WeexBuilder extends WebpackBuilder {
         'babel-polyfill': this.loadModulePath('babel-polyfill'),
       }
     }
-
     this.config.babel = {
-      presets: [this.loadModulePath('babel-preset-es2015'), this.loadModulePath('babel-preset-stage-0')],
-      plugins: [
-        this.loadModulePath('babel-plugin-transform-runtime'),
-        this.loadModulePath('babel-plugin-add-module-exports')
-      ], 
-      babelrc: true
-    }
-
-    // webpack plugins config
+        presets: [this.loadModulePath('babel-preset-es2015'), this.loadModulePath('babel-preset-stage-0')],
+        plugins: [
+          this.loadModulePath('babel-plugin-transform-runtime'),
+          this.loadModulePath('babel-plugin-add-module-exports')
+        ],
+        babelrc: true
+      }
+      // webpack plugins config
     if (this.options.min) {
       this.config.plugins.push(new webpack.optimize.UglifyJsPlugin({
         compress: {
