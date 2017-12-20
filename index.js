@@ -1,4 +1,4 @@
-const WeexBuilder = require('./builder/WeexBuilder');
+const WeexBuilder = require('./src/weexBuilder');
 exports.build = function (source, dest, options,callback) {
     if(!source||typeof source!=='string'||(Array.isArray(source)&&source.length==0)){
         return Promise.reject('"source" can not be empty!');

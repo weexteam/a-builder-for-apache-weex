@@ -1,9 +1,6 @@
 #!/usr/bin/env node
-/**
- * Created by exolution on 17/1/9.
- */
 const program = require('commander')
-const builder = require('../builder.js')
+const builder = require('../index')
 const chalk = require('chalk')
 const Gauge = require('gauge')
 const pathTool = require('path')
@@ -40,16 +37,14 @@ program.version(require('../package.json').version)
             gauge.hide()
             if (err) {
                 console.log(chalk.red('Build Failed!'))
-                console.error(chalk.red(err))
-                if (err.stack)console.error(err.stack)
+                err.forEach(e => console.error(e))
             }
             else {
                 console.log('Build completed!\nChild')
                 console.log(output.toString())
-                console.log(`Time: ${chalk.bold(json.time)}ms`)
             }
 
         })
-    })
+})
 program.parse(process.argv)
 if (showHelp)program.outputHelp()
