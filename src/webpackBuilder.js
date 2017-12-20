@@ -4,8 +4,6 @@
 const path = require('path');
 const sourcer = require('sourcer');
 const webpack = require('webpack');
-const util = require('./utils');
-const _blank = '                                                            ';
 module.exports = class WebpackBuilder {
   constructor (source, dest, options = {}) {
     const root = options.root || process.cwd();
@@ -23,13 +21,12 @@ module.exports = class WebpackBuilder {
   }
   build (callback) {
     this.initConfig();
-    let lastHash = null;
     if (this.source.length === 0) {
       return callback('no ' + (this.options.ext || '') + ' files found in source "' + this.sourceDef + '"');
     }
     const compiler = webpack(this.config);
     compiler.run((err, stats) => {
-      let result = {
+      const result = {
         toString: () => stats.toString({
           /** Add warnings */
           warnings: false,
@@ -45,10 +42,10 @@ module.exports = class WebpackBuilder {
           /** Add the origins of chunks and chunk merging info */
           chunkOrigins: false,
           children: false,
-          chunks: false,  // Makes the build much quieter
-          colors: true    // Shows colors in the console
+          chunks: false, // Makes the build much quieter
+          colors: true // Shows colors in the console
         })
-      }
+      };
       if (err) {
         console.error(err.stack || err);
         if (err.details) {
@@ -56,7 +53,7 @@ module.exports = class WebpackBuilder {
         }
         return callback && callback(err);
       }
-    
+
       const info = stats.toJson();
       if (stats.hasErrors()) {
         return callback && callback(info.errors);
@@ -77,7 +74,7 @@ module.exports = class WebpackBuilder {
       // });
       // const result = Object.keys(this.config.entry).map((e) => {
       // console.log(jsonStats.assetsByChunkName[e])
-      
+
       //   return {
       //     from: path.join(this.base, e + path.extname(this.config.entry[e].split('?')[0])),
       //     to: path.join(this.dest, typeof jsonStats.assetsByChunkName[e] === 'string' ? jsonStats.assetsByChunkName[e] : jsonStats.assetsByChunkName[e][0]),
@@ -97,5 +94,4 @@ module.exports = class WebpackBuilder {
       // callback && callback(errorString, result, jsonStats);
     });
   }
-
 };

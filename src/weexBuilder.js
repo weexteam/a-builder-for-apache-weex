@@ -2,7 +2,6 @@
  * Created by exolution on 17/1/6.
  */
 const WebpackBuilder = require('./webpackBuilder');
-const pathTool = require('path');
 const webpack = require('webpack');
 const vueLoaderConfig = require('./vueLoader');
 const defaultExt = ['we', 'vue', 'js'];
@@ -34,7 +33,6 @@ class WeexBuilder extends WebpackBuilder {
     const sourceExt = path.extname(this.sourceDef);
     let dir;
     let filename;
-    let sourceMapFilename = '[file].map';
     const plugins = [
       /*
        * Plugin: BannerPlugin
@@ -48,14 +46,14 @@ class WeexBuilder extends WebpackBuilder {
       })
     ];
     // ./bin/weex-builder.js test dest --filename=[name].web.js
-    if(this.options.filename) {
+    if (this.options.filename) {
       filename = this.options.filename;
     }
     else {
       filename = '[name].js';
     }
     // Call like: ./bin/weex-builder.js test/index.vue dest/test.js
-    // Need to rename the filename of  
+    // Need to rename the filename of
     if (destExt && this.dest[this.dest.length - 1] !== '/' && sourceExt) {
       dir = path.dirname(this.dest);
       filename = path.basename(this.dest);
@@ -77,19 +75,18 @@ class WeexBuilder extends WebpackBuilder {
       */
       plugins.push(new webpack.optimize.UglifyJsPlugin({
         minimize: true,
-        sourceMap: this.options.devtool ? true : false
+        sourceMap: !!this.options.devtool
       }));
     }
 
     const webpackConfig = () => {
-      let entrys = {};
-      let configs;
+      const entrys = {};
       this.source.forEach(s => {
         let file = path.relative(path.resolve(this.base), s);
         file = file.replace(/\.\w+$/, '');
         entrys[file] = s;
-      })
-      configs = {
+      });
+      const configs = {
         entry: entrys,
         output: {
           path: dir,

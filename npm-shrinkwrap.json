@@ -1855,12 +1855,6 @@
           "resolved": "https://registry.npmjs.org/convert-source-map/-/convert-source-map-1.1.3.tgz",
           "integrity": "sha1-SCnId+n+SbMWHzvzZziI4gRpmGA=",
           "dev": true
-        },
-        "lodash.memoize": {
-          "version": "3.0.4",
-          "resolved": "https://registry.npmjs.org/lodash.memoize/-/lodash.memoize-3.0.4.tgz",
-          "integrity": "sha1-LcvSwofLwKVcxCMovQxzYVDVPj8=",
-          "dev": true
         }
       }
     },
@@ -4930,15 +4924,13 @@
       "dev": true
     },
     "loader-utils": {
-      "version": "0.2.17",
-      "resolved": "https://registry.npmjs.org/loader-utils/-/loader-utils-0.2.17.tgz",
-      "integrity": "sha1-+G5jdNQyBabmxg6RlvF8Apm/s0g=",
-      "dev": true,
+      "version": "1.1.0",
+      "resolved": "https://registry.npmjs.org/loader-utils/-/loader-utils-1.1.0.tgz",
+      "integrity": "sha1-yYrvSIvM7aL/teLeZG1qdUQp9c0=",
       "requires": {
         "big.js": "3.2.0",
         "emojis-list": "2.1.0",
-        "json5": "0.5.1",
-        "object-assign": "4.1.1"
+        "json5": "0.5.1"
       }
     },
     "locate-path": {
@@ -4973,6 +4965,12 @@
       "version": "4.5.0",
       "resolved": "https://registry.npmjs.org/lodash.clonedeep/-/lodash.clonedeep-4.5.0.tgz",
       "integrity": "sha1-4j8/nE+Pvd6HJSnBBxhXoIblzO8="
+    },
+    "lodash.memoize": {
+      "version": "3.0.4",
+      "resolved": "https://registry.npmjs.org/lodash.memoize/-/lodash.memoize-3.0.4.tgz",
+      "integrity": "sha1-LcvSwofLwKVcxCMovQxzYVDVPj8=",
+      "dev": true
     },
     "lodash.mergewith": {
       "version": "4.6.0",
@@ -7501,9 +7499,9 @@
       }
     },
     "vue-template-compiler": {
-      "version": "2.5.11",
-      "resolved": "https://registry.npmjs.org/vue-template-compiler/-/vue-template-compiler-2.5.11.tgz",
-      "integrity": "sha512-tlEyfeK1TkoO/+w7QIYP1fjYEuJSf60XchxYH3gUSYKeW4blPqM2BtA29y50fU6Tjm9eLUgUy8qGMA2euOr4Qw==",
+      "version": "2.5.13",
+      "resolved": "https://registry.npmjs.org/vue-template-compiler/-/vue-template-compiler-2.5.13.tgz",
+      "integrity": "sha512-15HWSgIxrGUcV0v7QRen2Y3fQsbgxXwMvjT/5XKMO0ANmaCcNh7y2OeIDTAuSGeosjb9+E1Pn2PHZ61VQWEgBQ==",
       "dev": true,
       "requires": {
         "de-indent": "1.0.2",
@@ -7610,9 +7608,9 @@
       }
     },
     "weex-loader": {
-      "version": "0.6.1",
-      "resolved": "https://registry.npmjs.org/weex-loader/-/weex-loader-0.6.1.tgz",
-      "integrity": "sha512-RsK8MB1Ke5bsp9/jRXDCqML0s6SIKTQcI2SvFi7z9QE99UN0oj82+b/FwaN/TQBeOX9B6UpUSHGDxRCTE+OjpA==",
+      "version": "0.6.3",
+      "resolved": "https://registry.npmjs.org/weex-loader/-/weex-loader-0.6.3.tgz",
+      "integrity": "sha512-eeV6nN/g/ZNHlKVdg5WX8/fehukVz0xAGilc4DW96Un3hdZxD7SiDOxrcUoRbHwtRxACM0fSgX48W3V4154W5A==",
       "dev": true,
       "requires": {
         "babel-loader": "6.4.1",
@@ -7628,7 +7626,7 @@
         "weex-styler": "0.3.0",
         "weex-templater": "0.3.5",
         "weex-transformer": "0.4.5",
-        "weex-vue-loader": "0.5.1"
+        "weex-vue-loader": "0.5.4"
       },
       "dependencies": {
         "babel-loader": {
@@ -7652,6 +7650,18 @@
             "commondir": "1.0.1",
             "mkdirp": "0.5.1",
             "pkg-dir": "1.0.0"
+          }
+        },
+        "loader-utils": {
+          "version": "0.2.17",
+          "resolved": "https://registry.npmjs.org/loader-utils/-/loader-utils-0.2.17.tgz",
+          "integrity": "sha1-+G5jdNQyBabmxg6RlvF8Apm/s0g=",
+          "dev": true,
+          "requires": {
+            "big.js": "3.2.0",
+            "emojis-list": "2.1.0",
+            "json5": "0.5.1",
+            "object-assign": "4.1.1"
           }
         },
         "pkg-dir": {
@@ -7701,9 +7711,9 @@
       }
     },
     "weex-template-compiler": {
-      "version": "2.5.4-weex.0",
-      "resolved": "https://registry.npmjs.org/weex-template-compiler/-/weex-template-compiler-2.5.4-weex.0.tgz",
-      "integrity": "sha512-Dsn1V29ZN3UcEJqH3JIgaGEZgSI2TD6jrBEyYO8slVpHifBBd8lKe7HHrKhsux360VMtuKof+ilYKSOl9+jxjA==",
+      "version": "2.5.11-weex.0",
+      "resolved": "https://registry.npmjs.org/weex-template-compiler/-/weex-template-compiler-2.5.11-weex.0.tgz",
+      "integrity": "sha512-2M8leSk+xHoqHDH0qLDHCMYnaX+QPQiVDJ6PPb5itVNQstXa2B/ywaMFxNnReGMeJ2UW03jvnryce9aQNqujbw==",
       "dev": true,
       "requires": {
         "he": "1.1.1"
@@ -7813,16 +7823,15 @@
       }
     },
     "weex-vue-loader": {
-      "version": "0.5.1",
-      "resolved": "https://registry.npmjs.org/weex-vue-loader/-/weex-vue-loader-0.5.1.tgz",
-      "integrity": "sha512-JzCCSHj7p2LmQmwhy6P/4JhuPDeYuw8D3T8q7L8h+HgDt7ZMSD6WI/gEHVrOLOYdYNwvA5mc6BXNwR17AFcofw==",
+      "version": "0.5.4",
+      "resolved": "https://registry.npmjs.org/weex-vue-loader/-/weex-vue-loader-0.5.4.tgz",
+      "integrity": "sha512-JMs/qfgmjmlWcqF91LvgazyNubm6Dz7vewop0QabKt3LRC/zVa/pxLC1CEuQDoAR2SPenh36awuw7p5sywMJXQ==",
       "dev": true,
       "requires": {
         "consolidate": "0.14.5",
         "hash-sum": "1.0.2",
         "he": "1.1.1",
         "js-beautify": "1.7.3",
-        "loader-utils": "0.2.17",
         "lru-cache": "4.1.1",
         "object-assign": "4.1.1",
         "postcss": "6.0.14",
@@ -7830,10 +7839,10 @@
         "source-map": "0.5.7",
         "vue-hot-reload-api": "2.1.0",
         "vue-style-loader": "3.0.3",
-        "vue-template-compiler": "2.5.11",
+        "vue-template-compiler": "2.5.13",
         "vue-template-es2015-compiler": "1.5.3",
         "weex-styler": "0.3.0",
-        "weex-template-compiler": "2.5.4-weex.0"
+        "weex-template-compiler": "2.5.11-weex.0"
       },
       "dependencies": {
         "ansi-styles": {
