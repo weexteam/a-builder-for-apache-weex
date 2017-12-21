@@ -3,7 +3,6 @@ node_modules/
 
 # Test
 example/
-test/
 
 # Created by IDE
 .idea/
