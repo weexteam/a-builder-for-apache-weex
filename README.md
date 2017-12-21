@@ -1,4 +1,9 @@
-## weex-builder
+# weex-builder
+
+[![Build Status](https://travis-ci.org/weexteam/weex-builder.svg?branch=master)](https://travis-ci.org/weexteam/weex-builder)
+[![dependcy](https://david-dm.org/weexteam/weex-builder.svg)](https://david-dm.org/weexteam/weex-builder)
+[![dev dependcy](https://david-dm.org/weexteam/weex-builder/dev-status.svg)](https://david-dm.org/weexteam/weex-builder?type=dev)
+
 a weex compiler tool 
 used by weex-toolkit (bind on "weex compile")
 
