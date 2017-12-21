@@ -1,6 +1,6 @@
 {
   "name": "weex-builder",
-  "version": "0.3.0",
+  "version": "0.3.2",
   "lockfileVersion": 1,
   "requires": true,
   "dependencies": {
@@ -4927,6 +4927,7 @@
       "version": "1.1.0",
       "resolved": "https://registry.npmjs.org/loader-utils/-/loader-utils-1.1.0.tgz",
       "integrity": "sha1-yYrvSIvM7aL/teLeZG1qdUQp9c0=",
+      "dev": true,
       "requires": {
         "big.js": "3.2.0",
         "emojis-list": "2.1.0",
@@ -7608,9 +7609,9 @@
       }
     },
     "weex-loader": {
-      "version": "0.6.3",
-      "resolved": "https://registry.npmjs.org/weex-loader/-/weex-loader-0.6.3.tgz",
-      "integrity": "sha512-eeV6nN/g/ZNHlKVdg5WX8/fehukVz0xAGilc4DW96Un3hdZxD7SiDOxrcUoRbHwtRxACM0fSgX48W3V4154W5A==",
+      "version": "0.6.6",
+      "resolved": "https://registry.npmjs.org/weex-loader/-/weex-loader-0.6.6.tgz",
+      "integrity": "sha512-PTobi9jqgSyyVXWBi45g5qMj6Pr8YRh9sDL2N0/3v3O7Tx7XWhiyLIYUnu79ZxLyW7mDS89E9LE7iStbFYAmNA==",
       "dev": true,
       "requires": {
         "babel-loader": "6.4.1",
@@ -7618,7 +7619,7 @@
         "babel-preset-es2015": "6.24.1",
         "babel-runtime": "6.26.0",
         "hash-sum": "1.0.2",
-        "loader-utils": "0.2.17",
+        "loader-utils": "1.1.0",
         "md5": "2.2.1",
         "parse5": "2.2.3",
         "source-map": "0.5.7",
@@ -7626,7 +7627,7 @@
         "weex-styler": "0.3.0",
         "weex-templater": "0.3.5",
         "weex-transformer": "0.4.5",
-        "weex-vue-loader": "0.5.4"
+        "weex-vue-loader": "0.5.5"
       },
       "dependencies": {
         "babel-loader": {
@@ -7639,6 +7640,20 @@
             "loader-utils": "0.2.17",
             "mkdirp": "0.5.1",
             "object-assign": "4.1.1"
+          },
+          "dependencies": {
+            "loader-utils": {
+              "version": "0.2.17",
+              "resolved": "https://registry.npmjs.org/loader-utils/-/loader-utils-0.2.17.tgz",
+              "integrity": "sha1-+G5jdNQyBabmxg6RlvF8Apm/s0g=",
+              "dev": true,
+              "requires": {
+                "big.js": "3.2.0",
+                "emojis-list": "2.1.0",
+                "json5": "0.5.1",
+                "object-assign": "4.1.1"
+              }
+            }
           }
         },
         "find-cache-dir": {
@@ -7650,18 +7665,6 @@
             "commondir": "1.0.1",
             "mkdirp": "0.5.1",
             "pkg-dir": "1.0.0"
-          }
-        },
-        "loader-utils": {
-          "version": "0.2.17",
-          "resolved": "https://registry.npmjs.org/loader-utils/-/loader-utils-0.2.17.tgz",
-          "integrity": "sha1-+G5jdNQyBabmxg6RlvF8Apm/s0g=",
-          "dev": true,
-          "requires": {
-            "big.js": "3.2.0",
-            "emojis-list": "2.1.0",
-            "json5": "0.5.1",
-            "object-assign": "4.1.1"
           }
         },
         "pkg-dir": {
@@ -7823,9 +7826,9 @@
       }
     },
     "weex-vue-loader": {
-      "version": "0.5.4",
-      "resolved": "https://registry.npmjs.org/weex-vue-loader/-/weex-vue-loader-0.5.4.tgz",
-      "integrity": "sha512-JMs/qfgmjmlWcqF91LvgazyNubm6Dz7vewop0QabKt3LRC/zVa/pxLC1CEuQDoAR2SPenh36awuw7p5sywMJXQ==",
+      "version": "0.5.5",
+      "resolved": "https://registry.npmjs.org/weex-vue-loader/-/weex-vue-loader-0.5.5.tgz",
+      "integrity": "sha512-yXrOK7rgdBIBkIFZZd6jHMJelAVdlMr+9//FcVA9vVgnDAMIG3OZyInzkEtjF7UyP4cfDpnWEphvlSQ4V3fAVA==",
       "dev": true,
       "requires": {
         "consolidate": "0.14.5",

@@ -1,6 +1,6 @@
 {
   "name": "weex-builder",
-  "version": "0.3.0",
+  "version": "0.3.2",
   "main": "index.js",
   "bin": "bin/weex-builder.js",
   "repository": {
@@ -49,6 +49,6 @@
     "vue-loader": "^12.2.0",
     "vue-style-loader": "^3.0.3",
     "webpack": "^3.10.0",
-    "weex-loader": "^0.6.3"
+    "weex-loader": "^0.6.6"
   }
 }
