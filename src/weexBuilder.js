@@ -6,7 +6,7 @@ const webpack = require('webpack');
 const vueLoaderConfig = require('./vueLoader');
 const defaultExt = ['we', 'vue', 'js'];
 const path = require('path');
-
+const utils = require('./utils');
 class WeexBuilder extends WebpackBuilder {
   constructor (source, dest, options = {}) {
     if (options.ext && typeof options.ext === 'string') {
@@ -16,16 +16,6 @@ class WeexBuilder extends WebpackBuilder {
       options.ext = defaultExt.join('|');
     }
     super(source, dest, options);
-  }
-
-  loadModulePath (moduleName, extra) {
-    try {
-      const path = require.resolve(path.join(moduleName, extra || ''));
-      return path.slice(0, path.lastIndexOf(moduleName) + moduleName.length);
-    }
-    catch (e) {
-      return moduleName;
-    }
   }
 
   initConfig () {
@@ -103,19 +93,19 @@ class WeexBuilder extends WebpackBuilder {
           rules: [{
             test: /\.js$/,
             use: [{
-              loader: 'babel-loader'
+              loader: utils.loadModulePath('babel-loader')
             }]
           }, {
             test: /\.we$/,
             use: [{
-              loader: 'weex-loader'
+              loader: utils.loadModulePath('weex-loader')
             }]
           }]
         },
         resolve: {
           alias: {
-            'babel-runtime': this.loadModulePath('babel-runtime', 'core-js'),
-            'babel-polyfill': this.loadModulePath('babel-polyfill')
+            'babel-runtime': utils.loadModulePath('babel-runtime', 'core-js'),
+            'babel-polyfill': utils.loadModulePath('babel-polyfill')
           }
         },
         /*
@@ -129,7 +119,7 @@ class WeexBuilder extends WebpackBuilder {
         configs.module.rules.push({
           test: /\.vue(\?[^?]+)?$/,
           use: [{
-            loader: 'vue-loader',
+            loader: utils.loadModulePath('vue-loader'),
             options: Object.assign(vueLoaderConfig({ useVue: true, usePostCSS: false }), {
               /**
                * important! should use postTransformNode to add $processStyle for
@@ -150,7 +140,7 @@ class WeexBuilder extends WebpackBuilder {
         configs.module.rules.push({
           test: /\.vue$/,
           use: [{
-            loader: this.loadModulePath('weex-loader'),
+            loader: utils.loadModulePath('weex-loader'),
             options: vueLoaderConfig({ useVue: false })
           }]
         });

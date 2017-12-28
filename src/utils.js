@@ -1,6 +1,7 @@
 const _sizeUnits = ['B', 'KB', 'MB', 'GB', 'TB', 'PB'];
+const path = require('path');
 
-exports.resolveSizeUnit = function resolveSizeUnit (size, i = 0) {
+const resolveSizeUnit = (size, i = 0) => {
   if (isNaN(size)) {
     return '';
   }
@@ -12,18 +13,28 @@ exports.resolveSizeUnit = function resolveSizeUnit (size, i = 0) {
   }
 };
 
-exports.cssLoaders = function (options) {
+const loadModulePath = (moduleName, extra) => {
+  try {
+    const localPath = require.resolve(path.join(moduleName, extra || ''));
+    return localPath.slice(0, localPath.lastIndexOf(moduleName) + moduleName.length);
+  }
+  catch (e) {
+    return moduleName;
+  }
+};
+
+const cssLoaders = (options) => {
   options = options || {};
 
   const cssLoader = {
-    loader: 'css-loader',
+    loader: loadModulePath('css-loader'),
     options: {
       sourceMap: options.sourceMap
     }
   };
 
   const postcssLoader = {
-    loader: 'postcss-loader',
+    loader: loadModulePath('postcss-loader'),
     options: {
       sourceMap: options.sourceMap
     }
@@ -37,14 +48,14 @@ exports.cssLoaders = function (options) {
     }
     if (loader) {
       loaders.push({
-        loader: loader + '-loader',
+        loader: loadModulePath(loader + '-loader'),
         options: Object.assign({}, loaderOptions, {
-          sourceMap: options.sourceMap
+          sourceMap: !!options.sourceMap
         })
       });
     }
     if (options.useVue) {
-      return ['vue-style-loader'].concat(loaders);
+      return [loadModulePath('vue-style-loader')].concat(loaders);
     }
     else {
       return loaders;
@@ -59,4 +70,10 @@ exports.cssLoaders = function (options) {
     stylus: generateLoaders('stylus'),
     styl: generateLoaders('stylus')
   };
+};
+
+module.exports = {
+  resolveSizeUnit,
+  loadModulePath,
+  cssLoaders
 };
