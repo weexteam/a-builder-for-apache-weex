@@ -15,7 +15,7 @@ const resolveSizeUnit = (size, i = 0) => {
 
 const loadModulePath = (moduleName, extra) => {
   try {
-    const localPath = require.resolve(path.join(moduleName, extra || ''));
+    const localPath = require.resolve(path.join(__dirname, '../node_modules', moduleName, extra || ''));
     return localPath.slice(0, localPath.lastIndexOf(moduleName) + moduleName.length);
   }
   catch (e) {
@@ -27,7 +27,7 @@ const cssLoaders = (options) => {
   options = options || {};
 
   const cssLoader = {
-    loader: loadModulePath('css-loader'),
+    loader: 'css-loader',
     options: {
       sourceMap: options.sourceMap
     }

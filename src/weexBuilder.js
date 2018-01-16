@@ -154,7 +154,7 @@ class WeexBuilder extends WebpackBuilder {
           net: 'empty',
           tls: 'empty',
           child_process: 'empty'
-        }
+        };
       }
       return configs;
     };

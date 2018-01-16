@@ -19,7 +19,6 @@ module.exports = class WebpackBuilder {
     this.dest = path.resolve(dest);
     this.options = options;
   }
-  
 
   build (callback) {
     this.initConfig();
@@ -55,13 +54,13 @@ module.exports = class WebpackBuilder {
         }
         return callback && callback(err);
       }
-  
+
       const info = stats.toJson();
       if (stats.hasErrors()) {
         return callback && callback(info.errors);
       }
       callback && callback(err, result, info);
-    }
+    };
     if (this.config.watch) {
       compiler.watch({
         ignored: /node_modules/,
