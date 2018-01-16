@@ -74,6 +74,9 @@ class WeexBuilder extends WebpackBuilder {
       this.source.forEach(s => {
         let file = path.relative(path.resolve(this.base), s);
         file = file.replace(/\.\w+$/, '');
+        if (!this.options.web) {
+          s += '?entry=true';
+        }
         entrys[file] = s;
       });
       const configs = {
@@ -144,6 +147,14 @@ class WeexBuilder extends WebpackBuilder {
             options: vueLoaderConfig({ useVue: false })
           }]
         });
+        configs.node = {
+          setImmediate: false,
+          dgram: 'empty',
+          fs: 'empty',
+          net: 'empty',
+          tls: 'empty',
+          child_process: 'empty'
+        }
       }
       return configs;
     };

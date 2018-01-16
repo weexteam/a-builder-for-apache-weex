@@ -19,13 +19,15 @@ module.exports = class WebpackBuilder {
     this.dest = path.resolve(dest);
     this.options = options;
   }
+  
+
   build (callback) {
     this.initConfig();
     if (this.source.length === 0) {
       return callback('no ' + (this.options.ext || '') + ' files found in source "' + this.sourceDef + '"');
     }
     const compiler = webpack(this.config);
-    compiler.run((err, stats) => {
+    const formatResult = (err, stats) => {
       const result = {
         toString: () => stats.toString({
           /** Add warnings */
@@ -53,45 +55,21 @@ module.exports = class WebpackBuilder {
         }
         return callback && callback(err);
       }
-
+  
       const info = stats.toJson();
       if (stats.hasErrors()) {
         return callback && callback(info.errors);
       }
       callback && callback(err, result, info);
-      // if (jsonStats.hash && jsonStats.hash === lastHash) {
-      //   return;
-      // }
-      // lastHash = jsonStats.hash;
-      // let errorString;
-      // if (jsonStats.errors.length > 0) {
-      //   errorString = '[webpack errors]\n' + jsonStats.errors.join('\n');
-      //   return callback && callback(errorString, null, jsonStats);
-      // }
-      // const sizeMap = {};
-      // jsonStats.assets.forEach(e => {
-      //   sizeMap[e.name.split('.')[0]] = e.size;
-      // });
-      // const result = Object.keys(this.config.entry).map((e) => {
-      // console.log(jsonStats.assetsByChunkName[e])
-
-      //   return {
-      //     from: path.join(this.base, e + path.extname(this.config.entry[e].split('?')[0])),
-      //     to: path.join(this.dest, typeof jsonStats.assetsByChunkName[e] === 'string' ? jsonStats.assetsByChunkName[e] : jsonStats.assetsByChunkName[e][0]),
-      //     size: sizeMap[e]
-      //   };
-      // });
-      // result.toString = function () {
-      //   let fromMaxLen = 0;
-      //   let toMaxLen = 0;
-      //   for (let i = 0; i < this.length; i++) {
-      //     const entry = this[i];
-      //     fromMaxLen = entry.from.length > fromMaxLen ? entry.from.length : fromMaxLen;
-      //     toMaxLen = entry.to.length > toMaxLen ? entry.to.length : toMaxLen;
-      //   }
-      //   return this.map((e, i) => '[' + i + ']' + e.from + _blank.substr(0, fromMaxLen - e.from.length) + '   --> ' + _blank.substr(0, fromMaxLen / 4) + e.to + ' - ' + util.resolveSizeUnit(e.size)).join('\n');
-      // };
-      // callback && callback(errorString, result, jsonStats);
-    });
+    }
+    if (this.config.watch) {
+      compiler.watch({
+        ignored: /node_modules/,
+        poll: 1000
+      }, formatResult);
+    }
+    else {
+      compiler.run(formatResult);
+    }
   }
 };
