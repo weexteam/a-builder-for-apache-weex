@@ -27,7 +27,7 @@ const cssLoaders = (options) => {
   options = options || {};
 
   const cssLoader = {
-    loader: 'css-loader',
+    loader: loadModulePath('css-loader'),
     options: {
       sourceMap: options.sourceMap
     }
