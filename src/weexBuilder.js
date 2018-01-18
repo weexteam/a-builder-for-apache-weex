@@ -68,7 +68,6 @@ class WeexBuilder extends WebpackBuilder {
         sourceMap: !!this.options.devtool
       }));
     }
-
     const webpackConfig = () => {
       const entrys = {};
       this.source.forEach(s => {
@@ -110,6 +109,15 @@ class WeexBuilder extends WebpackBuilder {
             'babel-runtime': utils.loadModulePath('babel-runtime', 'core-js'),
             'babel-polyfill': utils.loadModulePath('babel-polyfill')
           }
+        },
+        /**
+         * See: https://webpack.js.org/configuration/resolve/#resolveloader
+         */
+        resolveLoader: {
+          modules: [path.join(__dirname, '../node_modules')],
+          extensions: ['.js', '.json'],
+          mainFields: ['loader', 'main'],
+          moduleExtensions: ['-loader']
         },
         /*
         * Add additional plugins to the compiler.
