@@ -7,6 +7,7 @@ const vueLoaderConfig = require('./vueLoader');
 const defaultExt = ['we', 'vue', 'js'];
 const path = require('path');
 const utils = require('./utils');
+
 class WeexBuilder extends WebpackBuilder {
   constructor (source, dest, options = {}) {
     if (options.ext && typeof options.ext === 'string') {
@@ -17,7 +18,6 @@ class WeexBuilder extends WebpackBuilder {
     }
     super(source, dest, options);
   }
-
   initConfig () {
     const destExt = path.extname(this.dest);
     const sourceExt = path.extname(this.sourceDef);
@@ -96,12 +96,12 @@ class WeexBuilder extends WebpackBuilder {
           rules: [{
             test: /\.js$/,
             use: [{
-              loader: utils.loadModulePath('babel-loader')
+              loader: 'babel-loader'
             }]
           }, {
             test: /\.we$/,
             use: [{
-              loader: utils.loadModulePath('weex-loader')
+              loader: 'weex-loader'
             }]
           }]
         },
@@ -122,7 +122,7 @@ class WeexBuilder extends WebpackBuilder {
         configs.module.rules.push({
           test: /\.vue(\?[^?]+)?$/,
           use: [{
-            loader: utils.loadModulePath('vue-loader'),
+            loader: 'vue-loader',
             options: Object.assign(vueLoaderConfig({ useVue: true, usePostCSS: false }), {
               /**
                * important! should use postTransformNode to add $processStyle for
@@ -141,9 +141,9 @@ class WeexBuilder extends WebpackBuilder {
       }
       else {
         configs.module.rules.push({
-          test: /\.vue$/,
+          test: /\.vue(\?[^?]+)?$/,
           use: [{
-            loader: utils.loadModulePath('weex-loader'),
+            loader: 'weex-loader',
             options: vueLoaderConfig({ useVue: false })
           }]
         });
@@ -158,7 +158,6 @@ class WeexBuilder extends WebpackBuilder {
       }
       return configs;
     };
-
     this.config = webpackConfig();
   }
 }
