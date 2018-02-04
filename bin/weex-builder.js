@@ -30,7 +30,7 @@ program.version(require('../package.json').version)
             },
             watch: program.watch,
             devtool: program.devtool,
-            ext: pathTool.extname(source) || program.ext || 'vue',
+            ext: pathTool.extname(source) || program.ext || 'vue|we',
             web: !!program.web,
             min: !!program.min,
         }, function (err, output, json) {
