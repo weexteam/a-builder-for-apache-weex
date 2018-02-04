@@ -10,12 +10,10 @@ const utils = require('./utils');
 
 class WeexBuilder extends WebpackBuilder {
   constructor (source, dest, options = {}) {
-    if (options.ext && typeof options.ext === 'string') {
-      options.ext = options.ext.split(/,|\|/).filter(e => defaultExt.indexOf(e) === -1).concat(defaultExt).join('|');
-    }
-    else {
+    if (!(options.ext && typeof options.ext === 'string')) {
       options.ext = defaultExt.join('|');
     }
+
     super(source, dest, options);
   }
   initConfig () {
@@ -114,7 +112,7 @@ class WeexBuilder extends WebpackBuilder {
          * See: https://webpack.js.org/configuration/resolve/#resolveloader
          */
         resolveLoader: {
-          modules: [path.join(__dirname, '../node_modules')],
+          modules: [path.join(__dirname, '../node_modules'), path.resolve('node_modules')],
           extensions: ['.js', '.json'],
           mainFields: ['loader', 'main'],
           moduleExtensions: ['-loader']
