@@ -1,6 +1,6 @@
 {
   "name": "weex-builder",
-  "version": "0.3.15",
+  "version": "0.3.16",
   "lockfileVersion": 1,
   "requires": true,
   "dependencies": {
@@ -6976,6 +6976,21 @@
           "requires": {
             "has-flag": "2.0.0"
           }
+        }
+      }
+    },
+    "webpack-merge": {
+      "version": "4.1.2",
+      "resolved": "https://registry.npmjs.org/webpack-merge/-/webpack-merge-4.1.2.tgz",
+      "integrity": "sha512-/0QYwW/H1N/CdXYA2PNPVbsxO3u2Fpz34vs72xm03SRfg6bMNGfMJIQEpQjKRvkG2JvT6oRJFpDtSrwbX8Jzvw==",
+      "requires": {
+        "lodash": "4.17.5"
+      },
+      "dependencies": {
+        "lodash": {
+          "version": "4.17.5",
+          "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.17.5.tgz",
+          "integrity": "sha512-svL3uiZf1RwhH+cWrfZn3A4+U58wbP0tGVTLQPbjplZxZ8ROD9VLuNgsRniTlLe7OlSqR79RUehXgpBW/s0IQw=="
         }
       }
     },

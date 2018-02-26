@@ -4,28 +4,44 @@
 const path = require('path');
 const sourcer = require('sourcer');
 const webpack = require('webpack');
+const webpackMerge = require('webpack-merge'); // used to merge webpack configs
+const utils = require('./utils');
+
 module.exports = class WebpackBuilder {
   constructor (source, dest, options = {}) {
     const root = options.root || process.cwd();
+    const ext = path.extname(source);
     this.sourceDef = source;
-    this.source = sourcer.find(root, source, {
-      recursive: true
-    });
-    this.base = sourcer.base(source);
-    if (options.ext) {
-      const reg = new RegExp('\\.(' + options.ext + ')$');
-      this.source = this.source.filter(s => reg.test(path.extname(s)));
+    if (ext) {
+      this.source = [path.resolve(source)];
+      this.base = sourcer.base(source);
+    }
+    else {
+      this.source = sourcer.find(root, source, {
+        recursive: true
+      });
+      this.base = sourcer.base(source);
+      if (options.ext) {
+        const reg = new RegExp('\\.(' + options.ext + ')$');
+        this.source = this.source.filter(s => reg.test(path.extname(s)));
+      }
     }
     this.dest = path.resolve(dest);
     this.options = options;
   }
 
   build (callback) {
+    let configs = {};
     this.initConfig();
     if (this.source.length === 0) {
       return callback('no ' + (this.options.ext || '') + ' files found in source "' + this.sourceDef + '"');
     }
-    const compiler = webpack(this.config);
+    if (this.options.config) {
+      if (utils.exist(this.options.config)) {
+        configs = require(path.resolve(this.options.config));
+      }
+    }
+    const compiler = webpack(webpackMerge(this.config, configs));
     const formatResult = (err, stats) => {
       const result = {
         toString: () => stats.toString({

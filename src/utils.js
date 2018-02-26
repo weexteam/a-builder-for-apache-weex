@@ -1,5 +1,6 @@
 const _sizeUnits = ['B', 'KB', 'MB', 'GB', 'TB', 'PB'];
 const path = require('path');
+const fs = require('fs');
 
 const resolveSizeUnit = (size, i = 0) => {
   if (isNaN(size)) {
@@ -72,8 +73,19 @@ const cssLoaders = (options) => {
   };
 };
 
+const exist = (path) => {
+  try {
+    fs.accessSync(path, fs.F_OK);
+  }
+  catch (e) {
+    return false;
+  }
+  return true;
+};
+
 module.exports = {
   resolveSizeUnit,
   loadModulePath,
-  cssLoaders
+  cssLoaders,
+  exist
 };

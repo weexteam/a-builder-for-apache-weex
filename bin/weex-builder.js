@@ -6,18 +6,17 @@ const Gauge = require('gauge')
 const pathTool = require('path')
 let showHelp = true
 program.version(require('../package.json').version)
-    .option('-v,--version', 'show version')
     .option('-e,--ext [ext]', 'set enabled extname for compiler default is vue|we')
     .option('-web,--web', 'set web mode for h5 render')
     .option('-w,--watch', 'watch files and rebuild')
     .option('-d,--devtool [devtool]', 'set webpack devtool mode')
     .option('-m,--min', 'compress the output js (will disable inline-source-map)')
+    .option('-c,--config [path]', 'compile with a config file')
     .arguments('<source> <dest>')
     .action(function (source, dest) {
         showHelp = false
         let gauge = new Gauge()
         let maxProgress = 0
-        let babelConfig
         builder.build(source, dest, {
             onProgress: function (complete, action) {
                 if (complete > maxProgress) {
@@ -33,11 +32,12 @@ program.version(require('../package.json').version)
             ext: pathTool.extname(source) || program.ext || 'vue|we',
             web: !!program.web,
             min: !!program.min,
+            config: program.config
         }, function (err, output, json) {
             gauge.hide()
             if (err) {
                 console.log(chalk.red('Build Failed!'))
-                err.forEach(e => console.error(e))
+                console.error(err)
             }
             else {
                 console.log('Build completed!\nChild')
