@@ -61,7 +61,7 @@ class WeexBuilder extends WebpackBuilder {
       *
       * See: https://webpack.github.io/docs/list-of-plugins.html#uglifyjsplugin
       */
-      plugins.push(new webpack.optimize.UglifyJsPlugin({
+      plugins.unshift(new webpack.optimize.UglifyJsPlugin({
         minimize: true,
         sourceMap: !!this.options.devtool
       }));
