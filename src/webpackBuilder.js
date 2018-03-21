@@ -14,7 +14,7 @@ module.exports = class WebpackBuilder {
     this.sourceDef = source;
     if (ext) {
       this.source = [path.resolve(source)];
-      this.base = sourcer.base(source);
+      this.base = options.base || sourcer.base(source);
     }
     else {
       this.source = sourcer.find(root, source, {

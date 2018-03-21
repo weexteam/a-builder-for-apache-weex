@@ -12,6 +12,7 @@ program.version(require('../package.json').version)
     .option('-d,--devtool [devtool]', 'set webpack devtool mode')
     .option('-m,--min', 'compress the output js (will disable inline-source-map)')
     .option('-c,--config [path]', 'compile with a config file')
+    .option('-b,--base [path]', 'set source base path')
     .arguments('<source> <dest>')
     .action(function (source, dest) {
         showHelp = false
@@ -32,7 +33,8 @@ program.version(require('../package.json').version)
             ext: pathTool.extname(source) || program.ext || 'vue|we',
             web: !!program.web,
             min: !!program.min,
-            config: program.config
+            config: program.config,
+            base: program.base
         }, function (err, output, json) {
             gauge.hide()
             if (err) {
