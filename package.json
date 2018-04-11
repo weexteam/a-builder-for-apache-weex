@@ -1,6 +1,6 @@
 {
   "name": "weex-builder",
-  "version": "0.3.18",
+  "version": "0.3.19",
   "main": "index.js",
   "bin": "bin/weex-builder.js",
   "repository": {
@@ -53,5 +53,12 @@
     "chai": "^4.1.2",
     "eslint": "^4.13.1",
     "mocha": "^4.0.1"
+  },
+  "changelog": {
+    "messages": [
+      "Add `--base` option to set the base path of the output.",
+      "Add `--config` option to compile jsbundle with a config file.",
+      "Fixed the wrong output while uglify the weex bundle."
+    ]
   }
 }
