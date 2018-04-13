@@ -7,7 +7,7 @@ const vueLoaderConfig = require('./vueLoader');
 const defaultExt = ['we', 'vue', 'js'];
 const path = require('path');
 const utils = require('./utils');
-
+const RaxPlugin = require('rax-webpack-plugin');
 class WeexBuilder extends WebpackBuilder {
   constructor (source, dest, options = {}) {
     if (!(options.ext && typeof options.ext === 'string')) {
@@ -16,23 +16,25 @@ class WeexBuilder extends WebpackBuilder {
 
     super(source, dest, options);
   }
+
   initConfig () {
     const destExt = path.extname(this.dest);
     const sourceExt = path.extname(this.sourceDef);
     let dir;
     let filename;
-    const plugins = [
-      /*
-       * Plugin: BannerPlugin
-       * Description: Adds a banner to the top of each generated chunk.
-       * See: https://webpack.js.org/plugins/banner-plugin/
-       */
-      new webpack.BannerPlugin({
+
+    const plugins = [];
+      plugins.push(new webpack.BannerPlugin({
         banner: '// { "framework": "Vue"} \n',
         raw: true,
         exclude: 'Vue'
-      })
-    ];
+      }));
+    /*
+         * Plugin: BannerPlugin
+         * Description: Adds a banner to the top of each generated chunk.
+         * See: https://webpack.js.org/plugins/banner-plugin/
+         */
+
     // ./bin/weex-builder.js test dest --filename=[name].web.js
     if (this.options.filename) {
       filename = this.options.filename;
@@ -55,12 +57,12 @@ class WeexBuilder extends WebpackBuilder {
     }
     if (this.options.min) {
       /*
-      * Plugin: UglifyJsPlugin
-      * Description: Minimize all JavaScript output of chunks.
-      * Loaders are switched into minimizing mode.
-      *
-      * See: https://webpack.github.io/docs/list-of-plugins.html#uglifyjsplugin
-      */
+            * Plugin: UglifyJsPlugin
+            * Description: Minimize all JavaScript output of chunks.
+            * Loaders are switched into minimizing mode.
+            *
+            * See: https://webpack.github.io/docs/list-of-plugins.html#uglifyjsplugin
+            */
       plugins.unshift(new webpack.optimize.UglifyJsPlugin({
         minimize: true,
         sourceMap: !!this.options.devtool
@@ -85,10 +87,10 @@ class WeexBuilder extends WebpackBuilder {
         watch: this.options.watch || false,
         devtool: this.options.devtool || false,
         /*
-        * Options affecting the resolving of modules.
-        *
-        * See: http://webpack.github.io/docs/configuration.html#module
-        */
+                * Options affecting the resolving of modules.
+                *
+                * See: http://webpack.github.io/docs/configuration.html#module
+                */
         module: {
           rules: [{
             test: /\.js$/,
@@ -109,8 +111,8 @@ class WeexBuilder extends WebpackBuilder {
           }
         },
         /**
-         * See: https://webpack.js.org/configuration/resolve/#resolveloader
-         */
+                 * See: https://webpack.js.org/configuration/resolve/#resolveloader
+                 */
         resolveLoader: {
           modules: [path.join(__dirname, '../node_modules'), path.resolve('node_modules')],
           extensions: ['.js', '.json'],
@@ -118,10 +120,10 @@ class WeexBuilder extends WebpackBuilder {
           moduleExtensions: ['-loader']
         },
         /*
-        * Add additional plugins to the compiler.
-        *
-        * See: http://webpack.github.io/docs/configuration.html#plugins
-        */
+                * Add additional plugins to the compiler.
+                *
+                * See: http://webpack.github.io/docs/configuration.html#plugins
+                */
         plugins: plugins
       };
       if (this.options.web) {
@@ -131,9 +133,9 @@ class WeexBuilder extends WebpackBuilder {
             loader: 'vue-loader',
             options: Object.assign(vueLoaderConfig({ useVue: true, usePostCSS: false }), {
               /**
-               * important! should use postTransformNode to add $processStyle for
-               * inline style prefixing.
-               */
+                             * important! should use postTransformNode to add $processStyle for
+                             * inline style prefixing.
+                             */
               optimizeSSR: false,
               compilerModules: [{
                 postTransformNode: el => {
@@ -167,4 +169,5 @@ class WeexBuilder extends WebpackBuilder {
     this.config = webpackConfig();
   }
 }
+
 module.exports = WeexBuilder;

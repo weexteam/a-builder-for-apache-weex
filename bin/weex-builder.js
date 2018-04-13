@@ -13,6 +13,7 @@ program.version(require('../package.json').version)
     .option('-m,--min', 'compress the output js (will disable inline-source-map)')
     .option('-c,--config [path]', 'compile with a config file')
     .option('-b,--base [path]', 'set source base path')
+    .option('-r,--rax', 'build for rax')
     .arguments('<source> <dest>')
     .action(function (source, dest) {
         showHelp = false
@@ -34,7 +35,8 @@ program.version(require('../package.json').version)
             web: !!program.web,
             min: !!program.min,
             config: program.config,
-            base: program.base
+            base: program.base,
+            rax:!!program.rax
         }, function (err, output, json) {
             gauge.hide()
             if (err) {
