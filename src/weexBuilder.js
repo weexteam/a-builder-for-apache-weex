@@ -6,7 +6,6 @@ const webpack = require('webpack');
 const vueLoaderConfig = require('./vueLoader');
 const defaultExt = ['we', 'vue', 'js'];
 const path = require('path');
-const utils = require('./utils');
 
 class WeexBuilder extends WebpackBuilder {
   constructor (source, dest, options = {}) {
@@ -93,7 +92,10 @@ class WeexBuilder extends WebpackBuilder {
           rules: [{
             test: /\.js$/,
             use: [{
-              loader: 'babel-loader'
+              loader: 'babel-loader',
+              options: {
+                presets: ['es2015', 'stage-0']
+              }
             }]
           }, {
             test: /\.we$/,
@@ -101,12 +103,6 @@ class WeexBuilder extends WebpackBuilder {
               loader: 'weex-loader'
             }]
           }]
-        },
-        resolve: {
-          alias: {
-            'babel-runtime': utils.loadModulePath('babel-runtime', 'core-js'),
-            'babel-polyfill': utils.loadModulePath('babel-polyfill')
-          }
         },
         /**
          * See: https://webpack.js.org/configuration/resolve/#resolveloader

@@ -4,7 +4,12 @@ const builder = require('../index')
 const chalk = require('chalk')
 const Gauge = require('gauge')
 const pathTool = require('path')
+const binname = 'weex'
 let showHelp = true
+
+// rename the cmdname for weex-toolkit
+program._name = `${binname} compile`
+
 program.version(require('../package.json').version)
     .option('-e,--ext [ext]', 'set enabled extname for compiler default is vue|we')
     .option('-web,--web', 'set web mode for h5 render')

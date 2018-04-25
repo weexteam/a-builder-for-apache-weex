@@ -1,6 +1,6 @@
 {
   "name": "weex-builder",
-  "version": "0.3.19",
+  "version": "0.4.0",
   "main": "index.js",
   "bin": "bin/weex-builder.js",
   "repository": {
@@ -24,8 +24,6 @@
   },
   "dependencies": {
     "babel-loader": "^7.1.2",
-    "babel-plugin-add-module-exports": "^0.2.1",
-    "babel-plugin-transform-runtime": "^6.9.0",
     "babel-polyfill": "^6.26.0",
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-stage-0": "^6.24.1",
@@ -56,9 +54,8 @@
   },
   "changelog": {
     "messages": [
-      "Add `--base` option to set the base path of the output.",
-      "Add `--config` option to compile jsbundle with a config file.",
-      "Fixed the wrong output while uglify the weex bundle."
+      "Modify help tips.",
+      "Remove useless babel configurations."
     ]
   }
 }
