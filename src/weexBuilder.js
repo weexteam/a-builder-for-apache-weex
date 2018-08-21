@@ -27,7 +27,7 @@ class WeexBuilder extends WebpackBuilder {
        * See: https://webpack.js.org/plugins/banner-plugin/
        */
       new webpack.BannerPlugin({
-        banner: '// { "framework": "Vue"} \n',
+        banner: `// { "framework": "${sourceExt === '.we' ? 'Weex' : 'Vue'}"} \n`,
         raw: true,
         exclude: 'Vue'
       })
